@@ -58,21 +58,22 @@ class UsersForm extends React.Component {
         return(
             <Row>
                 <Col>
-                    <Form onSubmit={this.handleSubmit}></Form>
+                    <Form onSubmit={this.handleSubmit}>
                     <Form.Group controlId='nome'>
                         <Form.Label>Nome</Form.Label>
-                        <Form.Control type="text" name="nome" onChange={this.handleChange} />
+                        <Form.Control placeholder="Nome" type="text" name="nome" onChange={this.handleChange} />
                     </Form.Group>
                     <Form.Group controlId='senha'>
                         <Form.Label>Senha</Form.Label>
-                        <Form.Control type="text" name="senha" onChange={this.handleChange} />
+                        <Form.Control  placeholder="Password" type="password" name="senha" onChange={this.handleChange} />
                     </Form.Group>
                     <Form.Group controlId='email'>
                         <Form.Label>E-mail</Form.Label>
-                        <Form.Control type="text" name="email" onChange={this.handleChange} />
+                        <Form.Control placeholder="user@email.com" type="text" name="email" onChange={this.handleChange} />
                     </Form.Group>
-                    <Button variant="primary" type="Submit">Criar</Button>{' '}
-                    <Button variant="secondary" onClick={this.handleCancel}>Cancelar</Button>
+                    <Button  variant="primary" type="Submit">Criar</Button>{' '}
+                    <Button  variant="secondary" onClick={this.handleCancel}>Cancelar</Button>
+                    </Form>
                 </Col>
             </Row>
         )
