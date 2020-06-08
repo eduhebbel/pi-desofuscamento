@@ -14,6 +14,30 @@ class UsersTable extends React.Component {
         this.state = {
             users: []
         }
+
+        this.dellRow = this.dellRow.bind(this);
+    }
+
+    dellRow(id){
+     const uriDell = `http://localhost:3001/users/${id}`;
+     const options = {
+         method: "delte",
+         headers: {
+             "Content-Type": "application/json",
+             "Access-Control-Allow-Origin": "*"
+         }
+     }
+     
+     fetch(uriDell, options)
+         .then(res => res.json())
+         .then(data => {
+             this.setState({
+                 users: this.state.users.filter(users => users.id !== id)
+             })
+         })
+         .catch(erros => {
+             console.log(erros);
+         });
     }
 
     componentDidMount(){
@@ -33,7 +57,7 @@ class UsersTable extends React.Component {
                 <Col>
                     <Table striped bordered hover responsive size="sm"  >
                         <UsersTableHeader   />
-                        <UsersTableBody users={this.state.users} />
+                        <UsersTableBody users={this.state.users} dellRow={this.dellRow} />
                     </Table>
                 </Col>
             </Row>
@@ -66,7 +90,7 @@ function UsersTableBody(props){
             <tbody>
                 {usersTBody.map(users => {
                     return (
-                        <UsersTableRow users={users} key={users.id} />
+                        <UsersTableRow users={users} key={users.id} dellRow={props.dellRow} />
                     );
                 })}
             </tbody>
@@ -87,7 +111,7 @@ function UsersTableBody(props){
 function UsersTableRow(props){
     const userRow = props.users;
     const uriEdit = `/edit/${userRow.id}`;
-    //const uriDell = `/`;
+   
     return(
         <tr align ="justify">
             <td>{userRow.id}</td>
@@ -96,7 +120,7 @@ function UsersTableRow(props){
             <td  align ="right" >
                 <ButtonGroup className="mr-1" >
                     <Button  href={uriEdit} variant="secondary" variant="warning">Modificar</Button>
-                    <UsersHomeDellButton />
+                    <UsersHomeDellButton userId={userRow.id} dellRow={props.dellRow} />
                 </ButtonGroup>
             </td>
             
