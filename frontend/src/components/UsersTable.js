@@ -39,7 +39,7 @@ class UsersTable extends React.Component {
          .catch(erros => {
              console.log(erros);
          });
-    }
+    }//Fim do metodo DellRow
 
     componentDidMount(){
         fetch('http://localhost:3001/Users')
@@ -50,7 +50,7 @@ class UsersTable extends React.Component {
             })
         ))
         .catch(err => console.log(err));
-    }
+    }//Fim do componentDidMount
 
     render() {
         return (
@@ -79,7 +79,7 @@ function UsersTableHeader(){
             </tr>
         </thead>
     )
-}
+}//Fim do UsersTableHeader
 
 function UsersTableBody(props){
     const usersTBody = props.users;
@@ -107,7 +107,7 @@ function UsersTableBody(props){
     }
 
     return tbody;
-}
+}//Fim do UserTableBody
 
 function UsersTableRow(props){
     const userRow = props.users;
@@ -127,6 +127,6 @@ function UsersTableRow(props){
             
         </tr>
     )
-}
+}//Fim do UsersTableRow
 
 export default UsersTable;
