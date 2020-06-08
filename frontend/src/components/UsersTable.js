@@ -21,10 +21,11 @@ class UsersTable extends React.Component {
     dellRow(id){
      const uriDell = `http://localhost:3001/users/${id}`;
      const options = {
-         method: "delte",
+         method: "delete",
          headers: {
              "Content-Type": "application/json",
-             "Access-Control-Allow-Origin": "*"
+             "Access-Control-Allow-Origin": "*",
+             "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE"
          }
      }
      
