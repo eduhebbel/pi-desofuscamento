@@ -9,13 +9,89 @@ class UsersTable extends React.Component {
         super(props)
 
         this.state = {
-            Users: []
+            users: []
         }
     }
 
     componentDidMount(){
-        fetch('http://localhost:3001/Users');
+        fetch('http://localhost:3001/Users')
+        .then(res => res.json())
+        .then(data =>(
+            this.setState({
+                users: data.data
+            })
+        ))
+        .catch(err => console.log(err));
     }
+
+    render() {
+        return (
+            <Row>
+                <Col>
+                    <Table striped bordered hover responsive size="sm"  >
+                        <UsersTableHeader   />
+                        <UsersTableBody users={this.state.users} />
+                    </Table>
+                </Col>
+            </Row>
+
+        );
+    }
+}
+
+function UsersTableHeader(){
+    return (
+        
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th></th>
+            </tr>
+        </thead>
+    )
+}
+
+function UsersTableBody(props){
+    const usersTBody = props.users;
+
+    let tbody = '';
+
+    if(usersTBody.length > 0){
+        tbody = (
+            <tbody>
+                {usersTBody.map(users => {
+                    return (
+                        <UsersTableRow users={users} key={users.id} />
+                    );
+                })}
+            </tbody>
+        )
+    } else{
+        tbody = (
+            <tbody>
+                <tr>
+                    <td colSpan='3'>Nenhum Usuario foi encontrado!</td>
+                </tr>
+            </tbody>
+        )
+    }
+
+    return tbody;
+}
+
+function UsersTableRow(props){
+    const userRow = props.users;
+    return(
+        <tr>
+            <td>{userRow.id}</td>
+            <td>{userRow.nome}</td>
+            <td>{userRow.email}</td>
+            <td></td>
+            
+        </tr>
+    )
 }
 
 export default UsersTable;
