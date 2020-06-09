@@ -31,7 +31,7 @@ router.get('/', (req, res) => {
 
 //Inicio do Solicita usuario por ID
 router.get('/:id', [
-    check('id', '"id de ser um numero inteiro e correspondente à usuário existente!')
+    check('id', '"id deve ser um numero inteiro e correspondente à usuário existente!')
         .trim()
         .escape()
         .isInt()

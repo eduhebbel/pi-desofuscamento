@@ -42,9 +42,10 @@ class UsersForm extends React.Component {
                 "Access-Control-Allow-Origin": "*",
                  "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE"
                  },
-                 body: JSON.stringify(this.state),
+                 body: JSON.stringify(this.state)
                 
             }
+            
         } else{
             
             options = {
@@ -56,6 +57,7 @@ class UsersForm extends React.Component {
                 },
                 body: JSON.stringify(this.state)
             }
+            
         }//Fim do Else
         
         fetch(uri, options)
@@ -131,7 +133,6 @@ class UsersForm extends React.Component {
                         </Modal.Body>
                     </Modal.Dialog>
                 </Col>
-                
             </Row>
         )
     }
