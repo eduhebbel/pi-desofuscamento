@@ -1,0 +1,15 @@
+version: '3.3'
+services:
+    mysql_pi:
+        # build: db/.
+        image: mysql/mysql-server:latest
+        ports:
+            - 3306:3306
+        volumes:
+            - ./db/db:/var/lib/mysql
+    # backend:
+    #     build: ~/Documents/senai/pi-desofuscamento/backend/.
+    #     ports:
+    #         - 3001:3001
+    #     depends_on:
+    #         - mysql_pi
