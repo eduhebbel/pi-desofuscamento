@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Modal from 'react-bootstrap/Modal';
 import Table from 'react-bootstrap/Table';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -59,7 +60,7 @@ class UsersTable extends React.Component {
                     <Table striped bordered hover responsive size="sm"  >
                         <UsersTableHeader   />
                         <UsersTableBody users={this.state.users} dellRow={this.dellRow} />
-                    </Table>
+                    </Table>  
                 </Col>
             </Row>
 
@@ -114,14 +115,15 @@ function UsersTableRow(props){
     const uriEdit = `/edit/${userRow.id}`;
    
     return(
+        
         <tr align ="justify">
             <td>{userRow.id}</td>
             <td>{userRow.nome}</td>
             <td >{userRow.email}</td>
-            <td  align ="right" >
+        <td  align ="right" >
                 <ButtonGroup className="mr-1" >
-                    <Button  href={uriEdit} variant="secondary" variant="warning">Modificar</Button>
-                    <UsersHomeDellButton userId={userRow.id} dellRow={props.dellRow} />
+                    <Button  href={uriEdit} variant="secondary" variant="warning">Editar</Button>
+                    <UsersHomeDellButton  userId={userRow.id} dellRow={props.dellRow} />
                 </ButtonGroup>
             </td>
             

@@ -13,7 +13,6 @@ function UsersHome(){
         <UsersHomeNewButton />
         <UsersTable />
         <UsersHomeNewButton />
-        
       </React.Fragment>
     );
   }//Final da Função UsersHome
