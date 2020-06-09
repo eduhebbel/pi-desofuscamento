@@ -19,38 +19,38 @@ class UsersTable extends React.Component {
         this.dellRow = this.dellRow.bind(this);
     }
 
-    dellRow(id){
-     const uriDell = `http://localhost:3001/users/${id}`;
-     const options = {
-         method: "delete",
-         headers: {
-             "Content-Type": "application/json",
-             "Access-Control-Allow-Origin": "*",
-             "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE"
-         }
-     }
-     
-     fetch(uriDell, options)
-         .then(res => res.json())
-         .then(data => {
-             this.setState({
-                 users: this.state.users.filter(users => users.id !== id)
-             })
-         })
-         .catch(erros => {
-             console.log(erros);
-         });
+    dellRow(id) {
+        const uriDell = `http://localhost:3001/users/${id}`;
+        const options = {
+            method: "delete",
+            headers: {
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE"
+            }
+        }
+
+        fetch(uriDell, options)
+            .then(res => res.json())
+            .then(data => {
+                this.setState({
+                    users: this.state.users.filter(users => users.id !== id)
+                })
+            })
+            .catch(erros => {
+                console.log(erros);
+            });
     }//Fim do metodo DellRow
 
-    componentDidMount(){
+    componentDidMount() {
         fetch('http://localhost:3001/Users')
-        .then(res => res.json())
-        .then(data =>(
-            this.setState({
-                users: data.data
-            })
-        ))
-        .catch(err => console.log(err));
+            .then(res => res.json())
+            .then(data => (
+                this.setState({
+                    users: data.data
+                })
+            ))
+            .catch(err => console.log(err));
     }//Fim do componentDidMount
 
     render() {
@@ -58,9 +58,9 @@ class UsersTable extends React.Component {
             <Row>
                 <Col>
                     <Table striped bordered hover responsive size="sm"  >
-                        <UsersTableHeader   />
+                        <UsersTableHeader />
                         <UsersTableBody users={this.state.users} dellRow={this.dellRow} />
-                    </Table>  
+                    </Table>
                 </Col>
             </Row>
 
@@ -68,9 +68,9 @@ class UsersTable extends React.Component {
     }
 }
 
-function UsersTableHeader(){
+function UsersTableHeader() {
     return (
-        
+
         <thead>
             <tr>
                 <th>ID</th>
@@ -82,12 +82,12 @@ function UsersTableHeader(){
     )
 }//Fim do UsersTableHeader
 
-function UsersTableBody(props){
+function UsersTableBody(props) {
     const usersTBody = props.users;
 
     let tbody = '';
 
-    if(usersTBody.length > 0){
+    if (usersTBody.length > 0) {
         tbody = (
             <tbody>
                 {usersTBody.map(users => {
@@ -97,7 +97,7 @@ function UsersTableBody(props){
                 })}
             </tbody>
         )
-    } else{
+    } else {
         tbody = (
             <tbody>
                 <tr>
@@ -110,23 +110,23 @@ function UsersTableBody(props){
     return tbody;
 }//Fim do UserTableBody
 
-function UsersTableRow(props){
+function UsersTableRow(props) {
     const userRow = props.users;
     const uriEditR = `/edit/${userRow.id}`;
-   
-    return(
-        
-        <tr align ="justify">
+
+    return (
+
+        <tr align="justify">
             <td>{userRow.id}</td>
             <td>{userRow.nome}</td>
             <td >{userRow.email}</td>
-        <td  align ="right" >
+            <td align="right" >
                 <ButtonGroup className="mr-1" >
-                    <Button  href={uriEditR} variant="secondary" variant="warning">Editar</Button>
-                    <UsersHomeDellButton  userId={userRow.id} dellRow={props.dellRow} />
+                    <Button href={uriEditR} variant="secondary" variant="warning">Editar</Button>
+                    <UsersHomeDellButton userId={userRow.id} dellRow={props.dellRow} />
                 </ButtonGroup>
             </td>
-            
+
         </tr>
     )
 }//Fim do UsersTableRow

@@ -6,15 +6,15 @@ import UsersHomeNewButton from './UsersHomeNewButton';
 
 
 
-function UsersHome(){
-    return (
-      <React.Fragment>
-        <UsersHeader title="Home" />
-        <UsersHomeNewButton />
-        <UsersTable />
-        <UsersHomeNewButton />
-      </React.Fragment>
-    );
-  }//Final da Função UsersHome
+function UsersHome() {
+  return (
+    <React.Fragment>
+      <UsersHeader title="Home" />
+      <UsersHomeNewButton />
+      <UsersTable />
+      <UsersHomeNewButton />
+    </React.Fragment>
+  );
+}//Final da Função UsersHome
 
-  export default UsersHome;
+export default UsersHome;
