@@ -32,8 +32,8 @@ class UsersForm extends React.Component {
         let uri = 'http://localhost:3001/users';
         let options = {};
 
-        if("id" in this.props){
-            const userId = this.props.id;
+        if("usersId" in this.props){
+            const userId = this.props.usersId;
             uri = uri + `/${userId}`;
             options = {
                 method: 'put',
@@ -42,9 +42,11 @@ class UsersForm extends React.Component {
                 "Access-Control-Allow-Origin": "*",
                  "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE"
                  },
-                 body: JSON.stringify(this.state)
+                 body: JSON.stringify(this.state),
+                
             }
         } else{
+            
             options = {
                 method: 'post',
                 headers: {
@@ -55,7 +57,7 @@ class UsersForm extends React.Component {
                 body: JSON.stringify(this.state)
             }
         }//Fim do Else
-
+        
         fetch(uri, options)
         .then(res => res.json())
         .then(data => {
@@ -73,11 +75,11 @@ class UsersForm extends React.Component {
     }//Fim do HandleCancel
 
     componentDidMount(){
-        if("id" in this.props){
-            const userId = this.props.id;
+        if("usersId" in this.props){
+            const userId = this.props.usersId;
             const uriEdit = `http://localhost:3001/users/${userId}`;
             fetch(uriEdit)
-            .then(res => res.json)
+            .then(res => res.json())
             .then(data => {
                 this.setState({
                     nome: data.data[0].nome,
@@ -86,6 +88,7 @@ class UsersForm extends React.Component {
                 });
             })
             .catch(erros => {
+                
                 console.log(erros);
             });
         }

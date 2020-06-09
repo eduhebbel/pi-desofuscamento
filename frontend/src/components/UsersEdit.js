@@ -5,13 +5,13 @@ import UsersHeader from './UsersHeader';
 import UsersForm from './UsersForm';
 
 function UsersEdit(){
-    const { id } = useParams();
-    const title = `Edição de Usuario ID:${id}`;
+    const { usersId } = useParams();
+    const title = `Edição de Usuario ID:${usersId}`;
   
   return (
     <React.Fragment>
       <UsersHeader title={title} />
-      <UsersForm id={id} />
+      <UsersForm usersId={usersId} />
     </React.Fragment>
   );
   }//Final da Função UsersEdit

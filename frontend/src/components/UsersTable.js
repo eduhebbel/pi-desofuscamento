@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Modal from 'react-bootstrap/Modal';
+
 import Table from 'react-bootstrap/Table';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -112,7 +112,7 @@ function UsersTableBody(props){
 
 function UsersTableRow(props){
     const userRow = props.users;
-    const uriEdit = `/edit/${userRow.id}`;
+    const uriEditR = `/edit/${userRow.id}`;
    
     return(
         
@@ -122,7 +122,7 @@ function UsersTableRow(props){
             <td >{userRow.email}</td>
         <td  align ="right" >
                 <ButtonGroup className="mr-1" >
-                    <Button  href={uriEdit} variant="secondary" variant="warning">Editar</Button>
+                    <Button  href={uriEditR} variant="secondary" variant="warning">Editar</Button>
                     <UsersHomeDellButton  userId={userRow.id} dellRow={props.dellRow} />
                 </ButtonGroup>
             </td>
