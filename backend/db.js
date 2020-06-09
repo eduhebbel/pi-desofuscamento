@@ -1,20 +1,20 @@
-const Sequelize =  require('sequelize');
+const Sequelize = require('sequelize');
 
 require('dotenv').config();
 
 const sequelize = new Sequelize(
     process.env.DBNAME,
     process.env.DBUSER,
-    process.env.DBPASS, { 
-        host: process.env.DBHOST,
-        port: process.env.DBPORT,
-        dialect: process.env.DBTYPE,
-        define: {
-            timestamps: false,
-            freezeTableName : true,
+    process.env.DBPASS, {
+    host: process.env.DBHOST,
+    port: process.env.DBPORT,
+    dialect: process.env.DBTYPE,
+    define: {
+        timestamps: false,
+        freezeTableName: true,
 
-        }
     }
+}
 );
 
 module.exports = sequelize;

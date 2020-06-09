@@ -4,7 +4,7 @@ const userRouter = require('./routes/users');//Caminho das rotas
 
 const app = express();
 
-const port = 3001;//Porta
+const port = 3001;
 
 app.use(express.json());
 app.use(cors());
@@ -13,6 +13,6 @@ app.get('/ping', (req, res) => {
     res.send('pong');
 });
 
-app.use('/users', userRouter);//Daclara Users como raiz
+app.use('/users', userRouter);
 
 app.listen(port, () => console.log(`App running at port ${port}`));
