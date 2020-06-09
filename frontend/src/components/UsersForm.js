@@ -95,6 +95,7 @@ class UsersForm extends React.Component {
     }
 
     render(){
+        console.log(this.props)
         return(
             <Row>
                 <Col>
@@ -124,7 +125,7 @@ class UsersForm extends React.Component {
                                 </Form.Group>
                                 <Modal.Footer>
                                     <Button size="sm"  variant="secondary" onClick={this.handleCancel}>Cancelar</Button>
-                                    <Button size="sm" variant="primary" type="Submit">Criar</Button>{' '}
+                                    <Button size="sm" variant="primary" type="Submit">{"usersId" in this.props ? "Editar" : "Criar"}</Button>{' '}
                                 </Modal.Footer>
                             </Form>
                         </Modal.Body>
