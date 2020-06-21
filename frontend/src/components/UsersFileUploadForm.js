@@ -15,7 +15,7 @@ function UsersFileUploadForm () {
                         <Modal.Title>Upload de Arquivo</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Form action ="httop;//localhost:3001/upload" method = "POST" encType = "multipart/form-data">
+                        <Form action ="http://localhost:3001/upload" method = "POST" encType = "multipart/form-data">
                             <Form.Group>
                                 <Form.File id = "attachment" name = "attachment" label = "Anexo" />
                             </Form.Group>
