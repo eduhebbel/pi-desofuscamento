@@ -46,7 +46,7 @@ function decodeCaSt(valueFromSplitedString){
     const endIndex = ' as CHAR )'.length;
     hexString = valueFromSplitedString.slice(startIndex, - endIndex);
     
-    const returnArray = [] // could be a string directly
+    const returnArray = [] // TODO: could be a string directly
     for (var i = 0; i < hexString.length; i=i+2){
         returnArray.push(hexMap.get(hexString[i]+hexString[i+1]));
     }
@@ -66,47 +66,63 @@ function decodeGeneral(encodedString, regexExp, charSet){
     }).join('');
 }
 
+function decodeComments(encodedString){
+    const rg = /\/\*\*\//;
+    return encodedString.split(rg).join('');
+}
+
+function decodePlus(encodedString){
+    return encodedString.replace(/\+/g, ' ');
+}
+
 function decodeAll(encodedString){
-    // funcList = [decodeAmp, decodeChar, decodePerc, decodeHex];
-    // var returnString
-    returnString = decodeAmp(encodedString);
+    returnString = decodeComments(encodedString);
+    returnString = decodePlus(returnString);
+    returnString = decodeAmp(returnString);
     returnString = decodeChar(returnString);
     returnString = decodePerc(returnString);
     returnString = decodeHex(returnString);
-    //TODO remover comentarios
-    //TODO remover +
 
-    return returnString
+    return returnString;
 
 }
 
+exports.default = decodeAll;
 
 
-var stringTest =  '&&&lt;;; nada relacionado&nbsp;&gt;';
-console.log(decodeAmp(stringTest));
-console.log(decodeAll(stringTest));
+// var stringTest =  '&&&lt;;; nada relacionado&nbsp;&gt;';
+// console.log(decodeAmp(stringTest));
+// console.log(decodeAll(stringTest));
 
-stringTest =  '&lt; nada relacionado&nbsp;&gt;';
-console.log(decodeAmp(stringTest));
-console.log(decodeAll(stringTest));
+// stringTest =  '&lt; nada relacionado&nbsp;&gt;';
+// console.log(decodeAmp(stringTest));
+// console.log(decodeAll(stringTest));
 
-stringTest =  'char(65)char(108)char(111)';
-console.log(decodeChar(stringTest));
-console.log(decodePerc(stringTest));
-console.log(decodeAll(stringTest));
+// stringTest =  'char(65)char(108)char(111)';
+// console.log(decodeChar(stringTest));
+// console.log(decodePerc(stringTest));
+// console.log(decodeAll(stringTest));
 
-stringTest =  '%41%6c%6f%5b%5d';
-console.log(decodePerc(stringTest));
-console.log(decodeAll(stringTest));
+// stringTest =  '%41%6c%6f%5b%5d';
+// console.log(decodePerc(stringTest));
+// console.log(decodeAll(stringTest));
 
-stringTest =  'Este e o CaSt(  0X746578746f206f726967696e616c as CHAR ) que foi decodificado';
-// stringTest =  'Este e o CaSt(  0Xi746578746f206f726967696e616cf as CHAR ) que foi decodificado';
-// stringTest =  'Este e o CaSt(  0X123456 as CHAR ) que foi decodificado';
-console.log(decodeHex(stringTest));
-console.log(decodeAll(stringTest));
+// stringTest =  'Este e o CaSt(  0X746578746f206f726967696e616c as CHAR ) que foi decodificado';
+// // stringTest =  'Este e o CaSt(  0Xi746578746f206f726967696e616cf as CHAR ) que foi decodificado';
+// // stringTest =  'Este e o CaSt(  0X123456 as CHAR ) que foi decodificado';
+// console.log(decodeHex(stringTest));
+// console.log(decodeAll(stringTest));
 
-stringTest =  "alfa beta &lt;char(65)char(108)char(111)&gt; celta %5btexto%5d delta"
-// stringTest =  'Este e o CaSt(  0Xi746578746f206f726967696e616cf as CHAR ) que foi decodificado';
-// stringTest =  'Este e o CaSt(  0X123456 as CHAR ) que foi decodificado';
-console.log(decodeHex(stringTest));
-console.log(decodeAll(stringTest));
+// stringTest =  "alfa beta &lt;char(65)char(108)char(111)&gt; celta %5btexto%5d delta"
+// // stringTest =  'Este e o CaSt(  0Xi746578746f206f726967696e616cf as CHAR ) que foi decodificado';
+// // stringTest =  'Este e o CaSt(  0X123456 as CHAR ) que foi decodificado';
+// console.log(decodeHex(stringTest));
+// console.log(decodeAll(stringTest));
+
+// stringTest = 'Este+e+o/**/ CaSt(  0X746578746f206f726967696e616c as CHAR )+que+foi /**/decodificado';
+// console.log(decodeComments(stringTest));
+// console.log(decodeAll(stringTest));
+
+// stringTest = 'Este+e+o/**/ CaSt(  0X746578746f206f726967696e616c as CHAR )+que+foi /**/decodificado';
+// console.log(decodePlus(stringTest));
+// console.log(decodeAll(stringTest));
