@@ -68,15 +68,15 @@ function decodeGeneral(encodedString, regexExp, charSet){
 
 function decodeAll(encodedString){
     // funcList = [decodeAmp, decodeChar, decodePerc, decodeHex];
-    var returnString
-    returnArray = decodeAmp(encodedString);
-    returnArray = decodeChar(returnArray);
-    returnArray = decodePerc(returnArray);
-    returnArray = decodeHex(returnArray);
+    // var returnString
+    returnString = decodeAmp(encodedString);
+    returnString = decodeChar(returnString);
+    returnString = decodePerc(returnString);
+    returnString = decodeHex(returnString);
     //TODO remover comentarios
     //TODO remover +
 
-    return returnArray
+    return returnString
 
 }
 
