@@ -84,10 +84,9 @@ function decodeAll(encodedString){
     returnString = decodeHex(returnString);
 
     return returnString;
-
 }
 
-exports.default = decodeAll;
+module.exports = decodeAll;
 
 
 // var stringTest =  '&&&lt;;; nada relacionado&nbsp;&gt;';
