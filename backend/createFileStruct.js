@@ -1,10 +1,7 @@
 const fs = require('fs');
+require('dotenv').config();
 
-const baseDir = 'files';
-const outputFiles = baseDir + '/' + 'output_files';
-const uploadedFiles = baseDir + '/' + 'uploaded_files';
-
-const fileStruct = [baseDir, outputFiles, uploadedFiles];
+const fileStruct = [process.env.BASE_DIR, process.env.OUTPUT_DIR, process.env.UPLOAD_DIR];
 
 
 function createDir(dir) {
