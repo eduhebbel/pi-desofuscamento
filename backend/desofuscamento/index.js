@@ -59,9 +59,9 @@ function decodeGeneral(encodedString, regexExp, charSet){
     return decodedSplitedString = splitedString.map(valueFromSplitedString => {
         var valueFromMap = charSet.get(valueFromSplitedString);
         if (valueFromMap) {
-            return valueFromMap
+            return valueFromMap;
         } else {
-            return valueFromSplitedString
+            return valueFromSplitedString;
         }
     }).join('');
 }
