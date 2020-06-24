@@ -6,7 +6,7 @@ const multer =  require("multer");
 const decodeAll = require('../desofuscamento/index');
 const fs = require('fs');
 const readline = require('readline');
-const once = require("events");
+const { once }  = require("events");
 // console.log(once);
 // console.log(typeof(once));
 
@@ -48,7 +48,7 @@ router.post('/file', (req, res) => {
 router.post('/text', [
         check('text', 'uma frase ofuscada é necessária')
         .trim()
-]),(req, res) => {
+],(req, res) => {
     res.status(501).send({ erro: 'not implemented'});
 });
 
