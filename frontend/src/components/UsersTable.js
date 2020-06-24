@@ -101,7 +101,7 @@ function UsersTableBody(props) {
         tbody = (
             <tbody>
                 <tr>
-                    <td colSpan='4' style= { {textAlign:  "center" , color: "red" }} >  Nenhum Usuario foi encontrado!</td>
+                    <td colSpan='4' style= {{textAlign:  "center" , color: "red" }} >  Nenhum Usuario foi encontrado!</td>
                 </tr>
             </tbody>
         )
