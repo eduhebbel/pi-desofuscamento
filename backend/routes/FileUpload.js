@@ -6,11 +6,7 @@ const multer =  require("multer");
 const decodeAll = require('../desofuscamento/index');
 const fs = require('fs');
 const readline = require('readline');
-<<<<<<< HEAD
-const {once} = require("events");
-=======
 const { once }  = require("events");
->>>>>>> 76bb50ebc8172366aabee23af40fc86ea91156ac
 // console.log(once);
 // console.log(typeof(once));
 
@@ -54,7 +50,7 @@ router.post('/text', [
         .trim()
 ],(req, res) => {
     res.status(501).send({ erro: 'not implemented'});
-};
+});
 
 async function processFile(file) {
     const outpath = `${process.env.OUTPUT_DIR}/${file.filename}`;
