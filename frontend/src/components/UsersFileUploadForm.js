@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal';
 
-function UsersFileUploadForm () {
+function UsersFileUploadForm() {
     return (
         <Row>
             <Col>
@@ -15,16 +15,16 @@ function UsersFileUploadForm () {
                         <Modal.Title>Upload de Arquivo</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <Form action ="http://localhost:3001/upload" method = "POST" encType = "multipart/form-data">
+                        <Form action="http://localhost:3001/upload/file" method="POST" encType="multipart/form-data">
                             <Form.Group>
-                                <Form.File id = "attachment" name = "attachment" label = "Anexo" />
+                                <Form.File id="attachment" name="attachment" label="Anexo" />
                             </Form.Group>
                             <Modal.Footer>
-                                <Button size="sm" variant="primary" type ="submit" >Enviar</Button>
+                                <Button size="sm" variant="primary" type="submit" >Enviar</Button>
                             </Modal.Footer>
                         </Form>
                     </Modal.Body>
-                    
+
                 </Modal.Dialog>
             </Col>
         </Row>

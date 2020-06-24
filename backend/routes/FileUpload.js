@@ -15,7 +15,7 @@ const upload = multer ({
 }).single('attachment');
 
 
-router.post('/', (req, res) => {
+router.post('/file', (req, res) => {
     upload(req, res, async (err) => {
         if(err) {
             console.log(err);
