@@ -1,12 +1,19 @@
 const router = require("express").Router();
+const { check } = require('express-validator');
+
 const multer =  require("multer");
+
+const decodeAll = require('../desofuscamento/index');
 const fs = require('fs');
 const readline = require('readline');
-const { once } = require('events');
+const once = require("events");
+// console.log(once);
+// console.log(typeof(once));
+
 
 const upload = multer ({
-    dest: 'upload_file/',
-    fileFilter: (req,file, cb) => {
+    dest: process.env.UPLOAD_DIR,
+    fileFilter: (req, file, cb) => {
         if(file.mimetype != 'text/plain' && !file.mimetype.includes('log')){
             return cb(new Error('Formato invalido.'));
         }
@@ -19,29 +26,34 @@ router.post('/file', (req, res) => {
     upload(req, res, async (err) => {
         if(err) {
             console.log(err);
-
-            res.status(442).send({ erro: 'Formato invalido'} )
-
+            res.status(442).send({ erro: 'Formato invalido'});
         } else {
             let file = req.file;
-            console.log(file);
 
             const path = await processFile(file);
 
             if(path){
                 res.download(path, file.originalname);
             } else {
-                res.status(500).send();
+                console.log('erro desofuscando arquivo');
+                res.status(500).send({erro: 'erro desofuscando arquivo'});
             }
             
         }
        
 
     });
-});//Fim do Post
+});
+
+router.post('/text', [
+        check('text', 'uma frase ofuscada é necessária')
+        .trim()
+]),(req, res) => {
+    res.status(501).send({ erro: 'not implemented'});
+});
 
 async function processFile(file) {
-    const outpath = `${process.env.OUTDIR}/${file.filename}`;
+    const outpath = `${process.env.OUTPUT_DIR}/${file.filename}`;
     const writeStream = fs.createWriteStream(outpath, {
         flags: 'a'
     });
@@ -56,16 +68,15 @@ async function processFile(file) {
     });
 
     readInterface.on('line', (line) => {
-            writeStream.write(`${line.toUpperCase()}\n`);
+            writeStream.write(`${decodeAll(line)}\n`);
     });
 
     readInterface.on('close', () => {
         writeStream.end();
     });
-
-    await once(readInterface, 'close');
     
-    console.log(outpath);
+    await once(writeStream, 'finish');
+    
     return outpath;
 }
 
