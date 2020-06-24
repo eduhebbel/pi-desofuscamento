@@ -1,25 +1,18 @@
 const fs = require('fs');
 require('dotenv').config();
 
-const fileStruct = [process.env.BASE_DIR, process.env.OUTPUT_DIR, process.env.UPLOAD_DIR];
+// const fileStruct = [process.env.BASE_DIR, process.env.OUTPUT_DIR, process.env.UPLOAD_DIR];
+const fileStruct = [process.env.OUTPUT_DIR, process.env.UPLOAD_DIR];
 
 
 function createDir(dir) {
-    fs.access(dir, fs.constants.F_OK, (err) => {
-        if (err) {
-            fs.mkdirSync(dir, (err) => {
-                if (err) throw err;
-                console.log(`${dir} criado com sucesso!`);
-            });
-        } else {
-            fs.stat(dir, (err, stats) => {
-                if (err) throw err;
-                if (!stats.isDirectory()) {
-                    throw new Error(`${dir} existe mas não é um diretorio`)
-                }
-            });
-        }
-    });
+    if (!fs.existsSync(dir)){
+        fs.mkdirSync(dir, { recursive: true }, err => {
+            if (err){
+                throw new Error('falhou ao criar os diretorios')
+            }
+        })
+    };
 }
 
 function createFileStruct() {
