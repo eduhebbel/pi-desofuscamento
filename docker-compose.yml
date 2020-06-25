@@ -7,9 +7,9 @@ services:
             - 3306:3306
         volumes:
             - ./db/db:/var/lib/mysql
-    # backend:
-    #     build: ~/Documents/senai/pi-desofuscamento/backend/.
-    #     ports:
-    #         - 3001:3001
-    #     depends_on:
-    #         - mysql_pi
+    backend:
+        build: ~/Documents/senai/pi-desofuscamento/backend/.
+        ports:
+            - 3001:3001
+        depends_on:
+            - mysql_pi
