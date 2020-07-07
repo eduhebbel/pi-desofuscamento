@@ -32,9 +32,12 @@ class UsersFileUploadForm extends React.Component{
     handleSubmit(e) {
         e.preventDefault();
 
+        let textoDes = document.getElementById('desofuscado');
+
         let uri = 'http://localhost:3001/upload/text';
         let options = {};
 
+       
         
         options = {
             method: 'post',
@@ -51,7 +54,7 @@ class UsersFileUploadForm extends React.Component{
         .then(data => {
             console.log(data);
 
-            var textoDes = document.getElementById('desofuscado');
+            
 
             //Exibe texto Desofuscado
             if("decodedString" in data){
@@ -72,6 +75,28 @@ class UsersFileUploadForm extends React.Component{
 
     }//Fim do handleSubmit
 
+    copy() {
+        let textarea = document.getElementById("desofuscado");
+        let copymsg = document.getElementById("copmsg");
+        
+        
+        if(textarea.value === "" || textarea.value == "Um Texto ofuscado é necessária no campo Texto Ofuscado!" ){
+
+            copymsg.innerHTML = "";
+            
+        }else{
+            
+            textarea.select();
+            document.execCommand('copy');
+            copymsg.innerHTML = "O texto desofuscado foi copiado para área de transferência.";
+            copymsg.style.color = "#38a811";
+            
+
+        }
+        
+      }//Fim do copy
+       
+           
    
 
 
@@ -80,36 +105,35 @@ class UsersFileUploadForm extends React.Component{
         return (
             <Row>
                 <Col>
-                    <Modal.Dialog>
-                        <Modal.Header >
-                            <Modal.Title>Upload de Arquivo</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
+                    
+                            <Form onSubmit={this.handleSubmit}>
+                                    <Form.Group controlId='text'>
+                                        <Form.Label>Texto Ofuscado:</Form.Label>
+                                        <textarea class="form-control" name='text' onChange={this.handleChange} value={this.state.text} ></textarea>
+                                        
+                                            <Form.Label>Texto Desofuscado:</Form.Label>
+                                            <textarea  class="form-control" id='desofuscado' nome='textoDesofuscado' onClick= {this.copy} readOnly></textarea>
+                                            <div id="copmsg"></div>
+                                    </Form.Group>
+                                    
+                                        <Button size="sm" variant="primary" type="submit" >Enviar</Button>
+                                    
+                            </Form>                                          
+                        
                             <Form action="http://localhost:3001/upload/file" method="POST" encType="multipart/form-data">
                                 <Form.Group>
                                     <Form.File id="attachment" name="attachment" label="Anexo" />
+                                    <div  nome='textoDesofuscadoa'></div>
                                 </Form.Group>
-                                <Modal.Footer>
+                                
                                     <Button size="sm" variant="primary" type="submit" >Enviar</Button>
-                                </Modal.Footer>
-                            </Form>
-                            
-                            <Modal.Title>Upload de Texto</Modal.Title>
-                            <Form onSubmit={this.handleSubmit}>
-                                <Form.Group controlId='text'>
-                                    <Form.Label>Texto Ofuscado:</Form.Label>
-                                    <textarea class="form-control" name='text' onChange={this.handleChange} value={this.state.text} ></textarea>
-                                    
-                                        <Form.Label>Texto Desofuscado:</Form.Label>
-                                         <div id='desofuscado' nome='textoDesofuscado'></div>
-                                </Form.Group>
-                                <Modal.Footer>
-                                    <Button size="sm" variant="primary" type="submit" >Enviar</Button>
-                                </Modal.Footer>
-                            </Form>
-                        </Modal.Body>
+                               
+                            </Form>                            
+                           
 
-                    </Modal.Dialog>
+                        
+
+                    
                 </Col>
             </Row>
         )
