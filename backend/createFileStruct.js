@@ -1,7 +1,6 @@
 const fs = require('fs');
 require('dotenv').config();
 
-// const fileStruct = [process.env.BASE_DIR, process.env.OUTPUT_DIR, process.env.UPLOAD_DIR];
 const fileStruct = [process.env.OUTPUT_DIR, process.env.UPLOAD_DIR];
 
 
