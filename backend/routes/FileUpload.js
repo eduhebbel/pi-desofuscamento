@@ -39,7 +39,7 @@ router.post('/file', (req, res) => {
 });
 
 router.post('/text', [
-    check('text', 'uma string ofuscada é necessária no campo text')
+    check('text', 'Um Texto ofuscado é necessária no campo Texto Ofuscado!')
         .trim()
         .isString()
         .notEmpty(),
