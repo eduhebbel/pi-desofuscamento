@@ -12,7 +12,6 @@ const sequelize = new Sequelize(
     define: {
         timestamps: false,
         freezeTableName: true,
-
     }
 }
 );
