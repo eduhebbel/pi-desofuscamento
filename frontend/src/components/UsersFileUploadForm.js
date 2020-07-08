@@ -4,7 +4,10 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import Card from 'react-bootstrap/Card';
+import bsCustomFileInput from 'bs-custom-file-input';
+
+
+
 
 
 
@@ -97,7 +100,9 @@ class UsersFileUploadForm extends React.Component{
         
       }//Fim do copy
        
-           
+      componentDidMount() {
+        bsCustomFileInput.init()
+      }
    
 
 
@@ -109,6 +114,7 @@ class UsersFileUploadForm extends React.Component{
                     
                                            
                     <Form onSubmit={this.handleSubmit}>
+                        
                          <Form.Group controlId='text'>
                              <Form.Label>Texto Ofuscado:</Form.Label>
                                 <textarea class="form-control" name='text' onChange={this.handleChange} value={this.state.text} ></textarea>
@@ -120,32 +126,38 @@ class UsersFileUploadForm extends React.Component{
                         </Form.Group>
                         <Form.Group>
                         <Button style= {{float: 'right'}} size="sm" variant="primary" type="submit" >Enviar</Button>
-                        </Form.Group>  
+                        </Form.Group>
+                          
                     </Form>
+                    
+                    <Form  action="http://localhost:3001/upload/file" method="POST" encType="multipart/form-data">
                         
-                        <Form  action="http://localhost:3001/upload/file" method="POST" encType="multipart/form-data">
-                        <div class="input-group mb-3"></div>          
-                             <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Arquivo</span>
-                                </div>
-                                <div class="custom-file">
-                                     <input type="file" class="custom-file-input"  id="attachment" name="attachment"></input>
-                                    <label class="custom-file-label" for="inputGroupFile01">Escolha um arquivo</label>
-                                </div>
-                            </div>
-                                    
-                            <div  nome='textoDesofuscadoa'></div>
-                            
-                            <Form.Group>
-                                <Button style= {{float: 'right'}} size="sm" variant="primary" type="submit" >Enviar</Button>
-                            </Form.Group>
 
-                        </Form>                          
+                        <div class="input-group mb-3"></div>
+                        <hr class="my-4" />
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">Upload</span>
+                            </div>
+                            <div class="custom-file">
+                                <input type="file" class="custom-file-input" id="attachment" name="attachment" />
+                                <label class="custom-file-label" for="inputGroupFile01">Escolha um Arquivo</label>
+                            </div>
+                        </div>                                              
+                                    
+                        <div  nome='textoDesofuscadoa'></div>
+                            
+                        <Form.Group>
+                            <Button style= {{float: 'right'}} size="sm" variant="primary" type="submit" >Enviar</Button>
+                        </Form.Group>
+
+                    </Form>                          
                                                                         
                 </Col>
             </Row>
         )
     }
 }
+
 export default UsersFileUploadForm;
