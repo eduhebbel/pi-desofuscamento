@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
-import Modal from 'react-bootstrap/Modal';
+import Card from 'react-bootstrap/Card';
 
 
 
@@ -33,7 +33,8 @@ class UsersFileUploadForm extends React.Component{
         e.preventDefault();
 
         let textoDes = document.getElementById('desofuscado');
-
+        let copymsg = document.getElementById("copmsg");
+        
         let uri = 'http://localhost:3001/upload/text';
         let options = {};
 
@@ -61,9 +62,9 @@ class UsersFileUploadForm extends React.Component{
                 textoDes.innerHTML = data.decodedString;
                 textoDes.style.color = 'black';
             }else{
-                
-                textoDes.innerHTML = data.errors[0].msg;
-                textoDes.style.color = 'red';
+                textoDes.innerHTML = "";
+                copymsg.innerHTML = data.errors[0].msg;
+                copymsg.style.color = 'red';
             }
             //Fim do Exibe texto Desofuscado
 
@@ -80,9 +81,9 @@ class UsersFileUploadForm extends React.Component{
         let copymsg = document.getElementById("copmsg");
         
         
-        if(textarea.value === "" || textarea.value == "Um Texto ofuscado é necessária no campo Texto Ofuscado!" ){
+        if(textarea.value === "" ){
 
-            copymsg.innerHTML = "";
+           
             
         }else{
             
@@ -106,34 +107,42 @@ class UsersFileUploadForm extends React.Component{
             <Row>
                 <Col>
                     
-                            <Form onSubmit={this.handleSubmit}>
-                                    <Form.Group controlId='text'>
-                                        <Form.Label>Texto Ofuscado:</Form.Label>
-                                        <textarea class="form-control" name='text' onChange={this.handleChange} value={this.state.text} ></textarea>
-                                        
-                                            <Form.Label>Texto Desofuscado:</Form.Label>
-                                            <textarea  class="form-control" id='desofuscado' nome='textoDesofuscado' onClick= {this.copy} readOnly></textarea>
-                                            <div id="copmsg"></div>
-                                    </Form.Group>
+                                           
+                    <Form onSubmit={this.handleSubmit}>
+                         <Form.Group controlId='text'>
+                             <Form.Label>Texto Ofuscado:</Form.Label>
+                                <textarea class="form-control" name='text' onChange={this.handleChange} value={this.state.text} ></textarea>
+                                            
+                            <Form.Label>Texto Desofuscado:</Form.Label>
+                                <textarea  class="form-control" id='desofuscado' nome='textoDesofuscado' onClick= {this.copy} readOnly></textarea>
+                                    <div id="copmsg"></div>
                                     
-                                        <Button size="sm" variant="primary" type="submit" >Enviar</Button>
+                        </Form.Group>
+                        <Form.Group>
+                        <Button style= {{float: 'right'}} size="sm" variant="primary" type="submit" >Enviar</Button>
+                        </Form.Group>  
+                    </Form>
+                        
+                        <Form  action="http://localhost:3001/upload/file" method="POST" encType="multipart/form-data">
+                        <div class="input-group mb-3"></div>          
+                             <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Arquivo</span>
+                                </div>
+                                <div class="custom-file">
+                                     <input type="file" class="custom-file-input"  id="attachment" name="attachment"></input>
+                                    <label class="custom-file-label" for="inputGroupFile01">Escolha um arquivo</label>
+                                </div>
+                            </div>
                                     
-                            </Form>                                          
-                        
-                            <Form action="http://localhost:3001/upload/file" method="POST" encType="multipart/form-data">
-                                <Form.Group>
-                                    <Form.File id="attachment" name="attachment" label="Anexo" />
-                                    <div  nome='textoDesofuscadoa'></div>
-                                </Form.Group>
-                                
-                                    <Button size="sm" variant="primary" type="submit" >Enviar</Button>
-                               
-                            </Form>                            
-                           
+                            <div  nome='textoDesofuscadoa'></div>
+                            
+                            <Form.Group>
+                                <Button style= {{float: 'right'}} size="sm" variant="primary" type="submit" >Enviar</Button>
+                            </Form.Group>
 
-                        
-
-                    
+                        </Form>                          
+                                                                        
                 </Col>
             </Row>
         )
