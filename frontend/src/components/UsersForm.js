@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal';
 
+
 class UsersForm extends React.Component {
     constructor(props) {
         super(props);
@@ -19,6 +20,8 @@ class UsersForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
     }//Fim do Construtor
+
+   
 
     limpaErroNome(){
 
@@ -117,16 +120,8 @@ class UsersForm extends React.Component {
                         alert("Usuario criado com sucesso!");
                         window.location.href = '/';
                     
-                }
-                   
-
-                       
-                    
-                    
-                    
-                
-              
-
+                }                 
+     
                 
             })
             .catch(erros => {

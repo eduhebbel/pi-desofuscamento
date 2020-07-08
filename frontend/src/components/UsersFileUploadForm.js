@@ -26,6 +26,14 @@ class UsersFileUploadForm extends React.Component{
 
     }//Fim do construtor
 
+    limpaErro(){
+
+        let copymsg = document.getElementById("copmsg");
+
+        copymsg.innerHTML = "";
+        
+    }
+
     handleChange(e) {
         this.setState({
             [e.target.name]: e.target.value
@@ -117,7 +125,7 @@ class UsersFileUploadForm extends React.Component{
                         
                          <Form.Group controlId='text'>
                              <Form.Label>Texto Ofuscado:</Form.Label>
-                                <textarea class="form-control" name='text' onChange={this.handleChange} value={this.state.text} ></textarea>
+                                <textarea class="form-control" name='text' onInput={this.limpaErro} onChange={this.handleChange} value={this.state.text} ></textarea>
                                             
                             <Form.Label>Texto Desofuscado:</Form.Label>
                                 <textarea  class="form-control" id='desofuscado' nome='textoDesofuscado' onClick= {this.copy} readOnly></textarea>
