@@ -20,6 +20,27 @@ class UsersForm extends React.Component {
         this.handleCancel = this.handleCancel.bind(this);
     }//Fim do Construtor
 
+    limpaErroNome(){
+
+        let nomeMsg = document.getElementById("nomeMsg");
+        nomeMsg.innerHTML = "";
+
+    }
+
+    limpaErroSenha(){
+
+        let senhaMsg = document.getElementById("senhaMsg");
+        senhaMsg.innerHTML = "";
+
+    }
+
+    limpaErroEmail(){
+
+        let emailMsg = document.getElementById("emailMsg");
+        emailMsg.innerHTML = "";
+
+    }
+
     handleChange(e) {
         this.setState({
             [e.target.name]: e.target.value
@@ -63,8 +84,50 @@ class UsersForm extends React.Component {
         fetch(uri, options)
             .then(res => res.json())
             .then(data => {
+
                 console.log(data);
-                window.location.href = '/';
+                let nomeMsg = document.getElementById("nomeMsg");
+                let senhaMsg = document.getElementById("senhaMsg");
+                let emailMsg = document.getElementById("emailMsg");
+
+                if ("errors" in data ) {
+
+                    for (let i = 0; i < data.errors.length; i++) {
+                           
+                        if (data.errors[i].param === "nome" ) {
+                                                        
+                            nomeMsg.innerHTML = data.errors[i].msg;
+                                    
+                        }
+
+                        if (data.errors[i].param === "senha" ) {
+                            
+                            senhaMsg.innerHTML = data.errors[i].msg;
+                        }
+
+                        if (data.errors[i].param === "email" ) {
+                            
+                            emailMsg.innerHTML = data.errors[i].msg;
+                        }
+                           
+                       }
+                    
+                } else {
+
+                        alert("Usuario criado com sucesso!");
+                        window.location.href = '/';
+                    
+                }
+                   
+
+                       
+                    
+                    
+                    
+                
+              
+
+                
             })
             .catch(erros => {
                 console.log(erros);
@@ -109,18 +172,21 @@ class UsersForm extends React.Component {
                             <Form onSubmit={this.handleSubmit}>
                                 <Form.Group controlId='nome'>
                                     <Form.Label>Nome</Form.Label>
-                                    <Form.Control size="sm" placeholder="Nome" type="text" name="nome" onChange={this.handleChange} value={this.state.nome} />
+                                    <Form.Control size="sm" placeholder="Nome" type="text"  name="nome" onInput={this.limpaErroNome} onChange={this.handleChange} value={this.state.nome} />
+                                    <Form.Text id="nomeMsg" style= {{color: "red"}}></Form.Text>
                                 </Form.Group>
                                 <Form.Group controlId='senha'>
                                     <Form.Label>Senha</Form.Label>
-                                    <Form.Control size="sm" placeholder="Password" type="password" name="senha" onChange={this.handleChange} value={this.state.senha} />
+                                    <Form.Control size="sm" placeholder="Password" type="password" name="senha" onInput={this.limpaErroSenha} onChange={this.handleChange} value={this.state.senha} />
+                                    <Form.Text  id="senhaMsg" style= {{color: "red"}} ></Form.Text>
                                     <Form.Text className="text-muted">
                                         Sua senha deve ter entre 8 e 20 caracteres, conter letras e números e não deve conter espaços, caracteres especiais ou emoji
                                     </Form.Text>
                                 </Form.Group>
                                 <Form.Group controlId='email'>
                                     <Form.Label>E-mail</Form.Label>
-                                    <Form.Control size="sm" placeholder="user@email.com" type="email" name="email" onChange={this.handleChange} value={this.state.email} />
+                                    <Form.Control size="sm" placeholder="user@email.com" type="email" name="email" onInput={this.limpaErroEmail} onChange={this.handleChange} value={this.state.email} />
+                                    <Form.Text  id="emailMsg" style= {{color: "red"}} ></Form.Text>
                                     <Form.Text className="text-muted">
                                         Por favor, digite um e-mail valido.
                                     </Form.Text>

@@ -72,19 +72,18 @@ router.get('/:id', [
 
 //Inicio do Cadastra novo usuario
 router.post('/', [
-    check('nome', 'nome é um campo obrigatorio.')
+    check( 'nome','Nome é um campo obrigatorio.')
         .trim()
         .escape()
         .notEmpty(),
-    check('senha', 'senha é um campo obrigatorio.')
+    check('senha', 'Senha é um campo obrigatorio.')
         .trim()
         .escape()
         .notEmpty(),
-    check('email', 'email, com valor válido, é um campo obrigatorio.')
+    check('email', 'E-mail, com valor válido, é um campo obrigatorio.')
         .trim()
         .escape()
         .notEmpty()
-        .isEmail()
 ], (req, res) => {
     const erros = validationResult(req);
 
@@ -113,25 +112,24 @@ router.post('/', [
 
 //Inicio do Altera um usuario
 router.put('/:id', [
-    check('id', '"id de ser um numero inteiro e correspondente à usuário existente!')
+    check('id', '"ID deve ser um numero inteiro e correspondente à usuário existente!')
         .trim()
         .escape()
         .isInt()
         .toInt()
         .notEmpty(),
-    check('nome', 'nome é um campo obrigatorio.')
+    check('nome', 'Nome é um campo obrigatorio.')
         .trim()
         .escape()
         .notEmpty(),
-    check('senha', 'senha é um campo obrigatorio.')
+    check('senha', 'Senha é um campo obrigatorio.')
         .trim()
         .escape()
         .notEmpty(),
-    check('email', 'email, com valor válido, é um campo obrigatorio.')
+    check('email', 'E-mail, com valor válido, é um campo obrigatorio.')
         .trim()
         .escape()
         .notEmpty()
-        .isEmail()
 ], (req, res) => {
     const erros = validationResult(req);
 
@@ -186,7 +184,7 @@ router.put('/:id', [
 
 //Inicio do Deleta um Usuario
 router.delete('/:id', [
-    check('id', '"id de ser um numero inteiro e correspondente à usuário existente!')
+    check('id', '"ID deve ser um numero inteiro e correspondente à usuário existente!')
         .trim()
         .escape()
         .isInt()
