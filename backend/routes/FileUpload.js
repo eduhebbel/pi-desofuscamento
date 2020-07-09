@@ -24,7 +24,7 @@ router.post('/file', (req, res) => {
     upload(req, res, async (err) => {
         if (err) {
             console.log(err);
-            res.status(442).send("<div style='top: 50%; left: 50%; width:30em; height: 18em; margin-top: -9em; margin-left: -15em; position:absolute;'> <h2 style='text-align: center;'>Formato inválido</h2> <div style='text-align: center;'><p>O arquivo enviado, deve ser do formato, .log ou .txt</p><input type='button' value='Ok' onclick='history.go(-1)'></div></div>");
+            res.status(442).send("<div style='top: 50%; left: 50%; width:30em; height: 18em; margin-top: -9em; margin-left: -15em; position:absolute;'> <h2 style='text-align: center;'>Formato inválido</h2> <div style='text-align: center;'><p>O arquivo enviado, deve ser do formato .log ou .txt</p><input type='button' value='Ok' onclick='history.go(-1)'></div></div>");
         } else {
             let file = req.file;
             const path = await processFile(file);
