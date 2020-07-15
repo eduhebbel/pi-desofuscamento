@@ -24,8 +24,6 @@ No Trabalho 1, deverá ser entregue e apresentado o código referente ao cadastr
 - Deve apresentar de maneira amigável mensagens de sucesso e de erro.
 - O programa deverá ser desenvolvido com linguagem JavaScript, utilizando Node.js. Para desenvolvimento dos programas servidor e cliente recomenda-se o uso dos frameworks Express e React, respectivamente.
 
-O código do programa deve ser entregue integralmente. Lembre-se de remover o diretório "node_modules" do(s) projeto(s) antes de compactar e anexar no AVA (faça uma cópia do(s) projeto(s) antes de remover o diretório). Lembre-se também de entregar qualquer script necessário para a execução dos programas, como, por exemplo, o script de criação do usuário da aplicação no SGBD, do banco de dados e das tabelas.
-
 #### Trabalho 2 - Segunda entrega do PI ####
 No Trabalho 2, deverá ser entregue e apresentada a implementação do algoritmo de desofuscamento de dados, assim como o código necessário para acessá-lo em uma aplicação Web. Este trabalho contempla uma parte do Projeto Integrador. Esta entrega deve atender aos seguintes requisitos:
 
@@ -36,12 +34,20 @@ Suportar desofuscamento do conteúdo de um arquivo de texto plano;
 Deve validar os dados fornecidos pelo usuário: 
 - Ou a string ou o arquivo precisa ser enviada;
 - Aceitar apenas arquivos de texto plano (ex.: .txt, .log).
-O programa deverá ser desenvolvido com linguagem JavaScript, utilizando Node.js. Para desenvolvimento do programa servidor, recomenda-se o uso do framework Express. NESTE TRABALHO NÃO SERÁ COBRADO (NEM AVALIADO) O PROGRAMA CLIENTE. Isto é, crie uma interface simples para demonstrar o funcionamento do algoritmo de desofuscamento no dia da apresentação. O programa cliente para a funcionalidade de desofuscamento faz parte do Trabalho 3, cuja entrega está marcada para o dia 07/07.
 
-O código do programa deve ser entregue integralmente. Lembre-se de remover o diretório "node_modules" do(s) projeto(s) antes de compactar e anexar no AVA (faça uma cópia do(s) projeto(s) antes de remover o diretório). Lembre-se também de entregar qualquer script necessário para a execução dos programas, como, por exemplo, o script de criação do usuário da aplicação no SGBD, do banco de dados e das tabelas. NESTE TRABALHO NÃO SERÃO ACEITAS ENTREGAS COM LINK PARA REPOSITÓRIO GIT OU OUTRO SIMILAR. O código-fonte do trabalho tem que ser postado no AVA em um arquivo compactado até as 19:10 do dia 25/06. Atenção ao enviar o trabalho no AVA para garantir que não ficou salvo apenas como rascunho. TRABALHOS ENTREGUES COM ATRASO PERDERÃO 1 PONTO, MAIS 1 PONTO PARA CADA HORA DE ATRASO.
+#### Trabalho 3 - Terceira entrega do PI ####
+No Trabalho 3, deverá ser entregue e apresentada a interface de acesso ao serviço de desofuscamento. Este trabalho contempla uma parte do Projeto Integrador. Esta entrega deve atender aos seguintes requisitos:
 
-Sobre a Avaliação
+- A aplicação deve permitir que o usuário informe uma string ofuscada na interface ou um arquivo com o conteúdo ofuscado; Pode-se utilizar uma página para cada tipo de entrada (string e arquivo) ou apresentar as duas entradas numa mesma página
+- Quando o usuário informar uma string ofuscada, a aplicação deve apresentar, após efetuar o processo de desofuscamento, a string desofuscada na página; Pode ser na mesma página ou em uma nova página
+- Quando o usuário informar um arquivo com conteúdo ofuscado, a aplicação pode, após efetuar o processo de desofuscamento, apresentar o conteúdo desofuscado na tela, retornar um arquivo com o conteúdo desofuscado para download, disponibilizar um link para o usuário baixar o arquivo desofuscado, entre outras alternativas que permitam ao usuário acessar o conteúdo do arquivo desofuscado
+- O programa cliente deve estar integrado ao programa servidor desenvolvido no Trabalho 2 (serviço de desofuscamento)
+- Deve apresentar de maneira amigável mensagens de sucesso e de erro
 
-O trabalho será avaliado pelo produto entregue, considerando a qualidade e o atendimento dos requisitos, pelo código desenvolvido e pela apresentação. As apresentações serão realizadas via Google Meet. Cada grupo terá 5 minutos para apresentar seu trabalho, seguido de mais 10 minutos onde o professor fará perguntas aos integrantes dos grupos sobre a implementação. As notas são individuais. Portanto, é necessária a participação de todos os integrantes do grupo no desenvolvimento e apresentação do trabalho.
+#### Trabalho 4 - Quarta entrega do PI ####
+No Trabalho 4, deverão ser entregues e apresentadas as facilidades de autenticação e autorização de acesso à aplicação desenvolvida ao longo dos Trabalhos 1, 2 e 3. Este trabalho contempla a última parte do Projeto Integrador. Nesta entrega, os seguintes requisitos devem ser atendidos:
 
-#### Outras entregas a definir ####
+- O programa cliente (frontend) deverá possuir uma interface para autenticação, onde o usuário informará suas credenciais, isto é, o identificador do usuário e a senha; 
+- A autenticação propriamente dita, isto é, a verificação das credenciais do usuário contra o banco de dados, deverá ser realizada no programa servidor (backend); 
+- O mecanismo de autorização deverá garantir que somente usuários autenticados no sistema tenham acesso ao serviço de desofuscamento e ao CRUD de usuários; Isto implica em implementar o mecanismo de autorização tanto para as rotas do programa cliente (frontend) quanto do programa servidor (backend);
+- Deve apresentar de maneira amigável mensagens de sucesso e de erro de autenticação e autorização; No caso específico de tentativa de acesso não autorizado, será considerado suficiente retornar o usuário para a interface de autenticação (tela de login).
