@@ -23,7 +23,7 @@ check('senha', 'Senha invalida!')
 const errors = validationResult(req);    
     
 
-    if(errors.isEmpty){
+    if(errors.isEmpty()){
 
         muser.findOne({
             where: { email: req.body.email }
