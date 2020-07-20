@@ -5,7 +5,7 @@ const musers = require('../models/musers');
 
 //Inicio do Solicita lista completa de Usuarios
 router.get('/', (req, res) => {
-    musers.findAll().then(musers => {
+    musers.findAll({attributes:['nome', 'email'],}).then(musers => {
         if (musers.length > 0) {
             return res.json({
                 data: musers
