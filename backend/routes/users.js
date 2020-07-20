@@ -7,7 +7,7 @@ const bcryptModule = require('bcrypt');
 
 //Inicio do Solicita lista completa de Usuarios
 router.get('/', (req, res) => {
-    musers.findAll({ attributes: ['nome', 'email'], }).then(musers => {
+    musers.findAll({ attributes: ['id','nome', 'email'], }).then(musers => {
         if (musers.length > 0) {
             return res.json({
                 data: musers
@@ -87,6 +87,8 @@ router.post('/', [
         .escape()
         .notEmpty()
 ], (req, res) => {
+
+    const erros = validationResult(req);
 
     if (erros.isEmpty()) {
         bcryptModule.hash(req.body.senha, 11, (err, hash) => {
