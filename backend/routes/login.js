@@ -1,4 +1,4 @@
-const router = require('express').Router();
+const router = require("express").Router();
 const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcrypt'); 
 const jwt = require('jsonwebtoken');
@@ -9,7 +9,7 @@ const muser = require('../models/musers');
 require('dotenv').config();
 
 
-router.port('/', [
+router.post('/', [
 check('email', 'Por favor, informe um email de usuario valido!')
 .trim()
 .escape()
@@ -20,12 +20,13 @@ check('senha', 'Senha invalida!')
 .notEmpty()
 ], (req, res) => {
 
-const erros = validationResult(req)    
+const errors = validationResult(req);    
+    
 
-    if(erros.isEmpty){
+    if(errors.isEmpty){
 
         muser.findOne({
-            where: { email: req.body.email}
+            where: { email: req.body.email }
         }).then(muser => {
             bcrypt.compare(req.body.senha, muser.senha)
             .then(result => {
@@ -46,20 +47,21 @@ const erros = validationResult(req)
                             value: '',
                             msg: 'Usuario e senha incorretos.'
                         }]
-                    })
+                    });
                 }
-            })
-        }).catch(erros => {
+            });
+        }).catch(error => {
            return res.status(500).json({
-               erros: [{
+               error: [{
                    value: '',
                    msg: 'Falha na comunicação com o banco.'
                }]
            }) 
         });
 
-    } else {
-        return res.status(422).json(erros);
+    }else{
+        console.log(errors)
+        return res.status(422).json(errors);
     }
 
 })
