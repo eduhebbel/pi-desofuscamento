@@ -9,6 +9,8 @@ const userRouter = require('./routes/users');
 const fileUploadRouter = require('./routes/FileUpload');
 const loginRouter = require('./routes/login');
 
+const auth = require('./auth');
+
 const app = express();
 
 const port = 3001;
@@ -16,8 +18,8 @@ const port = 3001;
 app.use(express.json());
 app.use(cors());
 
-app.use('/users', userRouter);
-app.use('/upload', fileUploadRouter);
+app.use('/users', auth, userRouter);
+app.use('/upload', auth, fileUploadRouter);
 app.use('/login' , loginRouter);
 createFileStruct();
 
