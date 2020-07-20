@@ -1,11 +1,13 @@
 const router = require("express").Router();
 const { check, validationResult } = require('express-validator');
 const musers = require('../models/musers');
+const { encrypt, encryptSync } = require('../password/encript');
+const bcryptModule = require('bcrypt');
 
 
 //Inicio do Solicita lista completa de Usuarios
 router.get('/', (req, res) => {
-    musers.findAll({attributes:['nome', 'email'],}).then(musers => {
+    musers.findAll({ attributes: ['nome', 'email'], }).then(musers => {
         if (musers.length > 0) {
             return res.json({
                 data: musers
@@ -72,7 +74,7 @@ router.get('/:id', [
 
 //Inicio do Cadastra novo usuario
 router.post('/', [
-    check( 'nome','Nome é um campo obrigatorio.')
+    check('nome', 'Nome é um campo obrigatorio.')
         .trim()
         .escape()
         .notEmpty(),
@@ -85,26 +87,30 @@ router.post('/', [
         .escape()
         .notEmpty()
 ], (req, res) => {
-    const erros = validationResult(req);
 
     if (erros.isEmpty()) {
-        musers.create({
-            nome: req.body.nome,
-            senha: req.body.senha,
-            email: req.body.email
-        }).then(musers => {
-            return res.json({
-                data: [musers]
+        bcryptModule.hash(req.body.senha, 11, (err, hash) => {
+            if (err) {
+                throw err;
+            }
+            musers.create({
+                nome: req.body.nome,
+                senha: hash,
+                email: req.body.email
+            }).then(musers => {
+                return res.json({
+                    data: [musers]
+                });
+            }).catch(erros => {
+                console.log(erros);
+                return res.status(500).json({
+                    erros: [{
+                        value: '',
+                        msg: 'Falha na comunicação com o Banco!',
+                    }]
+                });
             });
-        }).catch(erros => {
-            console.log(erros);
-            return res.status(500).json({
-                erros: [{
-                    value: '',
-                    msg: 'Falha na comunicação com o Banco!',
-                }]
-            });
-        });
+        })
     } else {
         return res.status(422).json(erros);
     }
