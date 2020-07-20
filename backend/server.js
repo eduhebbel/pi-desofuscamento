@@ -7,6 +7,7 @@ require('dotenv').config();
 
 const userRouter = require('./routes/users');
 const fileUploadRouter = require('./routes/FileUpload');
+const loginRouter = require('./routes/login');
 
 const app = express();
 
@@ -17,7 +18,7 @@ app.use(cors());
 
 app.use('/users', userRouter);
 app.use('/upload', fileUploadRouter);
-
+app.use('/login' , loginRouter);
 createFileStruct();
 
 app.listen(port, () => console.log(`App running at port ${port}`));
