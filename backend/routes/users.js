@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const { check, validationResult } = require('express-validator');
 const musers = require('../models/musers');
-const { encrypt, encryptSync } = require('../password/encript');
+//const { encrypt, encryptSync } = require('../password/encript');
 const bcryptModule = require('bcrypt');
 
 

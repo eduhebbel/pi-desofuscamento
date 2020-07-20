@@ -12,7 +12,7 @@ const { once } = require("events");
 const upload = multer({
     dest: process.env.UPLOAD_DIR,
     fileFilter: (req, file, cb) => {
-        if (file.mimetype != 'text/plain' && !file.mimetype.includes('log')) {
+        if (file.mimetype != 'text/plain' && !file.mimetype.includes('.log')) {
             return cb(new Error(' Formato invalido.'));
         }
         cb(null, true);
