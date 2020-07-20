@@ -73,7 +73,7 @@ function UsersTableHeader() {
 
         <thead>
             <tr>
-                <th>ID</th>
+                
                 <th>Nome</th>
                 <th>E-mail</th>
                 <th></th>
@@ -117,7 +117,7 @@ function UsersTableRow(props) {
     return (
 
         <tr align="justify">
-            <td>{userRow.id}</td>
+            
             <td>{userRow.nome}</td>
             <td >{userRow.email}</td>
             <td align="right" >
