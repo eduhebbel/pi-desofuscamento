@@ -8,6 +8,8 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import UsersHomeDellButton from './UsersHomeDellButton';
 
+import { getToken } from '../utils/auth';
+
 class UsersTable extends React.Component {
     constructor(props) {
         super(props)
@@ -43,7 +45,13 @@ class UsersTable extends React.Component {
     }//Fim do metodo DellRow
 
     componentDidMount() {
-        fetch('http://localhost:3001/Users')
+        const token = getToken();
+        const options = {
+            headers: {
+                "authorization": `Bearer ${token}`
+            }
+        }
+        fetch('http://localhost:3001/Users', options)
             .then(res => res.json())
             .then(data => (
                 this.setState({
