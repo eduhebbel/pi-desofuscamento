@@ -14,6 +14,8 @@ import About from './components/About';
 import NavigationBar from './components/NavigationBar';
 import Login from './components/Login';
 //Fim Componentes-Importados do ./componentes
+import { isAuth } from './utils/auth';
+
 function App() {
   return (
     <>
@@ -25,19 +27,42 @@ function App() {
               <Login />
             </Route>
             <Route path="/new">
-              <UsersNew />
+              {isAuth() ? (
+                <UsersNew />
+              ) : (
+                  <Login />
+                )}
             </Route>
             <Route path="/edit/:usersId">
-              <UsersEdit />
+              {isAuth() ? (
+                <UsersEdit />
+              ) : (
+                  <Login />
+                )}
             </Route>
             <Route path="/desofuscamento">
-              <UsersFileUpload />
+              {isAuth() ? (
+                <UsersFileUpload />
+              ) : (
+                  <Login />
+                )}
             </Route>
             <Route path="/sobre">
-              <About />
+              {isAuth() ? (
+                <About />
+              ) : (
+                  <Login />
+                )}
+            </Route>
+            <Route path="/home">
+              {isAuth() ? (
+                <UsersHome />
+              ) : (
+                  <Login />
+                )}
             </Route>
             <Route path="/">
-              <UsersHome />
+              <Login />
             </Route>
             {/* pagina de 404? */}
           </Switch>
