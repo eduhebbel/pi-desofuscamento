@@ -80,7 +80,7 @@ class UsersForm extends React.Component {
             options = {
                 method: 'post',
                 headers: {
-                    "authorization": `Bearer ${token}`,
+                    
                     "Content-Type": "application/json",
                     "Access-Control-Allow-Origin": "*",
                     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE"

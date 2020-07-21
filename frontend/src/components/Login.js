@@ -43,14 +43,21 @@ class Login extends React.Component {
 
 		fetch(loginUrl, options)
 			.then(res => {
+
+				let erroMsg = document.getElementById("msg");
+
 				if (!res.ok){
+
 					if (res.status === 500){
 						throw Error('erro no backend')
 					} else if (res.status === 404){
 						throw Error('Usuario ou senha incorretos')
 					} else if (res.status === 422){
-						throw Error('Usuario não encontrado')
+						
+						throw   Error('Usuario não encontrado')
+						
 					}
+					
 				}
 				return res.json();
 			})
@@ -58,15 +65,8 @@ class Login extends React.Component {
 
 				console.log(data)
 				console.log(data.token)
-				// (data.error).forEach(e => {
-				// 	let errorList = this.state.errors
-				// 	errorList.push(e.msg)
-				// 	this.setState({
-				// 		errors: errorList
-				// 	})
-				// })
+				
 
-				// console.log(this.state)
 				setToken(data.token)
 				window.location.href = '/desofuscamento';
 
@@ -106,11 +106,12 @@ class Login extends React.Component {
 								<Form.Group controlId='nome'>
 									<Form.Label>Email</Form.Label>
 									<Form.Control size="sm" placeholder="Email" type="email" name="email" onChange={this.handleChange} value={this.state.email} />
-									<Form.Text id="nomeMsg" style={{ color: "red" }}></Form.Text>
+									
 								</Form.Group>
 								<Form.Group  controlId='senha'>
 									<Form.Label>Senha</Form.Label>
 									<Form.Control size="sm" placeholder="Password" type="password" name="senha" onChange={this.handleChange} value={this.state.senha} />
+									<Form.Text id="msg" style= {{color: "red"}}></Form.Text>
 								</Form.Group>
 							</Form>
 							
