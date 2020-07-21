@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import bsCustomFileInput from 'bs-custom-file-input';
 
-
+import { getToken } from '../utils/auth';
 
 
 
@@ -45,6 +45,7 @@ class UsersFileUploadForm extends React.Component{
 
         let textoDes = document.getElementById('desofuscado');
         let copymsg = document.getElementById("copmsg");
+        const token = getToken();
         
         let uri = 'http://localhost:3001/upload/text';
         let options = {};
@@ -54,6 +55,7 @@ class UsersFileUploadForm extends React.Component{
         options = {
             method: 'post',
             headers: {
+                "authorization": `Bearer ${token}`,
                 "Content-Type": "application/json",
                 "Access-Control-Allow-Origin": "*",
                 "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE"

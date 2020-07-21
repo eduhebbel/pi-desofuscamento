@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use('/users', auth, userRouter);
-app.use('/upload', auth, fileUploadRouter);
+app.use('/upload',  fileUploadRouter);
 app.use('/login' , loginRouter);
 createFileStruct();
 
