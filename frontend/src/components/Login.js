@@ -115,6 +115,7 @@ class Login extends React.Component {
 							</Form>
 						</Modal.Body>
 						<Modal.Footer>
+							<Button size="sm" variant="primary" href="/new">Cadastrar</Button>
 							<Button size="sm" variant="secondary" onClick={this.handleCancel}>Cancelar</Button>
 							<Button size="sm" variant="primary" type="Submit" onClick={this.handleSubmit}>{"Login"}</Button>{' '}
 						</Modal.Footer>

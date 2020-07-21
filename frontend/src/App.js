@@ -27,11 +27,7 @@ function App() {
               <Login />
             </Route>
             <Route path="/new">
-              {isAuth() ? (
-                <UsersNew />
-              ) : (
-                  <Login />
-                )}
+              <UsersNew />
             </Route>
             <Route path="/edit/:usersId">
               {isAuth() ? (
