@@ -108,16 +108,20 @@ class Login extends React.Component {
 									<Form.Control size="sm" placeholder="Email" type="email" name="email" onChange={this.handleChange} value={this.state.email} />
 									<Form.Text id="nomeMsg" style={{ color: "red" }}></Form.Text>
 								</Form.Group>
-								<Form.Group controlId='senha'>
+								<Form.Group  controlId='senha'>
 									<Form.Label>Senha</Form.Label>
 									<Form.Control size="sm" placeholder="Password" type="password" name="senha" onChange={this.handleChange} value={this.state.senha} />
 								</Form.Group>
 							</Form>
+							
 						</Modal.Body>
-						<Modal.Footer>
-							<Button size="sm" variant="primary" href="/new">Cadastrar</Button>
-							<Button size="sm" variant="secondary" onClick={this.handleCancel}>Cancelar</Button>
-							<Button size="sm" variant="primary" type="Submit" onClick={this.handleSubmit}>{"Login"}</Button>{' '}
+						
+						<Modal.Footer style = {{justifyContent: "space-between"}} >
+
+								<Button size="sm"  variant="link"  href="/new">Não é cadastrado? Cadastre-se aqui.</Button>
+								<Button size="sm"  variant="danger" type="Submit" onClick={this.handleSubmit}>{"Entrar"}</Button>{' '}
+								
+
 						</Modal.Footer>
 					</Modal.Dialog>
 				</Col>
