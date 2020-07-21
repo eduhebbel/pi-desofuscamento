@@ -12,6 +12,7 @@ import UsersLayout from './components/UsersLayout';
 import UsersFileUpload from './components/UsersFileUpload';
 import About from './components/About';
 import NavigationBar from './components/NavigationBar';
+import Login from './components/Login';
 //Fim Componentes-Importados do ./componentes
 function App() {
   return (
@@ -20,6 +21,9 @@ function App() {
       <UsersLayout>
         <Router>
           <Switch>
+            <Route path="/login">
+              <Login />
+            </Route>
             <Route path="/new">
               <UsersNew />
             </Route>
