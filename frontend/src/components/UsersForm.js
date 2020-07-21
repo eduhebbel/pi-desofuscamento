@@ -6,6 +6,8 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal';
 
+import { getToken } from '../utils/auth';
+
 
 class UsersForm extends React.Component {
     constructor(props) {
@@ -55,13 +57,16 @@ class UsersForm extends React.Component {
 
         let uri = 'http://localhost:3001/users';
         let options = {};
+        const token = getToken();
 
         if ("usersId" in this.props) {
+           
             const userId = this.props.usersId;
             uri = uri + `/${userId}`;
             options = {
                 method: 'put',
                 headers: {
+                    "authorization": `Bearer ${token}`,
                     "Content-Type": "application/json",
                     "Access-Control-Allow-Origin": "*",
                     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE"
@@ -75,6 +80,7 @@ class UsersForm extends React.Component {
             options = {
                 method: 'post',
                 headers: {
+                    "authorization": `Bearer ${token}`,
                     "Content-Type": "application/json",
                     "Access-Control-Allow-Origin": "*",
                     "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE"
@@ -135,10 +141,19 @@ class UsersForm extends React.Component {
     }//Fim do HandleCancel
 
     componentDidMount() {
+
+        const token = getToken();
+        const options = {
+            headers: {
+                "authorization": `Bearer ${token}`
+            }
+        }
+
+
         if ("usersId" in this.props) {
             const userId = this.props.usersId;
             const uriEdit = `http://localhost:3001/users/${userId}`;
-            fetch(uriEdit)
+            fetch(uriEdit, options)
                 .then(res => res.json())
                 .then(data => {
                     this.setState({
