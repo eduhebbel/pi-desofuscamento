@@ -6,6 +6,8 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal';
 
+import setToken from '../utils/auth';
+
 class Login extends React.Component {
 	constructor(props) {
 		super(props);
@@ -40,10 +42,22 @@ class Login extends React.Component {
 		}
 
 		fetch(loginUrl, options)
-			.then(res => res.json())
+			.then(res => {
+				if (!res.ok){
+					if (res.status === 500){
+						throw Error('erro no backend')
+					} else if (res.status === 404){
+						throw Error('Usuario ou senha incorretos')
+					} else if (res.status === 422){
+						throw Error('Usuario não encontrado')
+					}
+				}
+				return res.json();
+			})
 			.then(data => {
 
 				console.log(data)
+				console.log(data.token)
 				// (data.error).forEach(e => {
 				// 	let errorList = this.state.errors
 				// 	errorList.push(e.msg)
@@ -52,12 +66,13 @@ class Login extends React.Component {
 				// 	})
 				// })
 
-				console.log(this.state)
-
+				// console.log(this.state)
+				setToken(data.token)
+				window.location.href = '/desofuscamento';
 
 			}).catch(err => {
 				console.log(err)
-				alert("Erro ao cadastrar");
+				alert(err);
 			})
 	}
 
