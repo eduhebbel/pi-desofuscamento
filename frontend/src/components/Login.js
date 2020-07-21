@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal';
 
-import setToken from '../utils/auth';
+import { setToken } from '../utils/auth';
 
 class Login extends React.Component {
 	constructor(props) {
