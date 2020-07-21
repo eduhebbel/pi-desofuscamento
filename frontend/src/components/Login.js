@@ -111,7 +111,7 @@ class Login extends React.Component {
 								<Form.Group  controlId='senha'>
 									<Form.Label>Senha</Form.Label>
 									<Form.Control size="sm" placeholder="Password" type="password" name="senha" onChange={this.handleChange} value={this.state.senha} />
-									<Form.Text id="msg" style= {{color: "red"}}></Form.Text>
+									
 								</Form.Group>
 							</Form>
 							
