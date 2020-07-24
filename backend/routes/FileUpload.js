@@ -8,6 +8,7 @@ const fs = require('fs');
 const readline = require('readline');
 const { once } = require("events");
 
+const auth = require('../auth');
 
 const upload = multer({
     dest: process.env.UPLOAD_DIR,
@@ -38,7 +39,7 @@ router.post('/file', (req, res) => {
     });
 });
 
-router.post('/text', [
+router.post('/text', auth, [
     check('text', 'Um Texto ofuscado é necessária no campo Texto Ofuscado!')
         .trim()
         .isString()

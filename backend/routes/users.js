@@ -1,12 +1,12 @@
 const router = require("express").Router();
 const { check, validationResult } = require('express-validator');
 const musers = require('../models/musers');
-//const { encrypt, encryptSync } = require('../password/encript');
 const bcryptModule = require('bcrypt');
+const auth = require('../auth');
 
 
 //Inicio do Solicita lista completa de Usuarios
-router.get('/', (req, res) => {
+router.get('/', auth ,(req, res) => {
     musers.findAll({ attributes: ['id','nome', 'email'], }).then(musers => {
         if (musers.length > 0) {
             return res.json({
@@ -32,7 +32,7 @@ router.get('/', (req, res) => {
 });//Fim do Solicita lista completa de Usuarios
 
 //Inicio do Solicita usuario por ID
-router.get('/:id', [
+router.get('/:id',auth, [
     check('id', '"id deve ser um numero inteiro e correspondente à usuário existente!')
         .trim()
         .escape()
@@ -119,7 +119,7 @@ router.post('/', [
 });//Fim do Cadastra novo usuario
 
 //Inicio do Altera um usuario
-router.put('/:id', [
+router.put('/:id', auth, [
     check('id', '"ID deve ser um numero inteiro e correspondente à usuário existente!')
         .trim()
         .escape()
@@ -191,7 +191,7 @@ router.put('/:id', [
 });//Fim do Altera um usuario
 
 //Inicio do Deleta um Usuario
-router.delete('/:id', [
+router.delete('/:id', auth, [
     check('id', '"ID deve ser um numero inteiro e correspondente à usuário existente!')
         .trim()
         .escape()
